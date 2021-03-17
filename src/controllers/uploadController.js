@@ -20,38 +20,7 @@ class uploadController {
     if (!req.file)
       return res.send('Please upload a file');
 
-    try {
 
-      return res.send({'File': req.files});
-      // // Read content from the file
-      // const fileContent = fs.readFileSync(req.file);
-
-      // // Setting up S3 upload parameters
-      // const params = {
-      //   Bucket: BUCKET_NAME,
-      //   Key: 'cat.jpg', // File name you want to save as in S3
-      //   Body: fileContent
-      // };
-
-      // // Uploading files to the bucket
-      // s3.upload(params, function (err, data) {
-      //   if (err) {
-      //     throw err;
-      //   }
-      //   console.log(`File uploaded successfully. ${data.Location}`);
-      // });
-
-      //Upload file to S3
-
-
-      //Insert file name and link in DB
-
-      // Return error of success msg
-
-    } catch (error) {
-      console.log('ERROR', error);
-      return res.status('500').json({ errors: { error: 'Files not found', err: error.message } });
-    }
   }
 
   //method to return files in the DB

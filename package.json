@@ -4,9 +4,9 @@
   "description": "File Upload Microservice",
   "main": "./src/app.js",
   "scripts": {
-    "start": "nodemon -L ./src/app.js ",
-    "dev": "nodemon --exec babel-node ./src/app.js",
-    "build": "babel ./src/app.js --out-file index.js"
+    "start": "nodemon -L ./src/server.js ",
+    "dev": "nodemon --exec babel-node ./src/server.js",
+    "build": "babel ./src/server.js --out-file index.js"
   },
   "keywords": [
     "Files"
