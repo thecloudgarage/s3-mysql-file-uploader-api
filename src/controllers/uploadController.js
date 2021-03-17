@@ -41,7 +41,7 @@ class uploadController {
             fileLink: data.Location
           });
 
-          // Return success msg
+          // Return stored file info 
           return res.status(200).json({
             Success: true,
             s3: data,
@@ -62,11 +62,16 @@ class uploadController {
   //method to return files in the DB
   static async getFiles(req, res) {
 
-    //Code to get all files from DB and return them
-    const files = await File.findAll({ limit: 10 });
+    // Get all files from DB 
+    const files = await File.findAll();
 
-    console.log(files);
-
+    // Return files
+    // Return success msg
+    return res.status(200).json({
+      Success: true,
+      files: files
+    })
+    
   }
 }
 
