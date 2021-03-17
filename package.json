@@ -2,7 +2,7 @@
   "name": "Uploader",
   "version": "1.0.0",
   "description": "File Upload Microservice",
-  "main": "./src/app.js",
+  "main": "./src/server.js",
   "scripts": {
     "start": "nodemon -L ./src/server.js ",
     "dev": "nodemon --exec babel-node ./src/server.js",
