@@ -9,8 +9,6 @@ const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
-  // .then(console.log("Connected to aws successfully"))
-  // .catch((err) => console.log(`Error: Can't commect to the db ${err}`));
 
 class uploadController {
 
