@@ -30,6 +30,11 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Create all db tables if they don't exist. 
+sequelize.sync() 
+  .then(() => {
+    console.log(`Database & tables created!`)
+});
 
 try {
     sequelize.authenticate()

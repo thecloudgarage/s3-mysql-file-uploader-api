@@ -10,9 +10,6 @@ dotenv.config();
 
 const app = express();
 
-// Create all db tables if they don't exist. 
-db.sequelize.sync()
-
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));

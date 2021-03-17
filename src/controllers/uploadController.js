@@ -1,4 +1,3 @@
-const fs = require('fs');
 const db = require('../database/models/');
 const dotenv = require('dotenv');
 const aws = require('aws-sdk');
@@ -35,14 +34,16 @@ class uploadController {
           throw err;
         }
 
+        //Insert file name and link in DB
+
+
         // Return success msg
         return res.status(200).json({
           Success: true,
-          Location: data.Location 
+          Location: data.Location
         })
       });
 
-      //Insert file name and link in DB
 
 
 
@@ -59,7 +60,7 @@ class uploadController {
   static async getFiles(req, res) {
 
     //Code to get all files from DB and return them
-
+    
   }
 }
 
