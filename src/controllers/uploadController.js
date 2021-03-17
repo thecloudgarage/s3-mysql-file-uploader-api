@@ -19,33 +19,36 @@ class uploadController {
       return res.send('Please upload a file');
 
     try {
-      const file_target = req.file;
+      const fileTarget = req.file;
       //Upload file to S3
       // Setting up S3 upload parameters
       const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: file_target.originalname, // File name to be saved on s3
-        Body: file_target.buffer
+        Key: fileTarget.originalname, // File name to be saved on s3
+        Body: fileTarget.buffer
       };
 
       // Uploading files to the bucket
-      s3.upload(params, function (err, data) {
+      s3.upload(params, async function (err, data) {
         if (err) {
           throw err;
         }
 
-        //Insert file name and link in DB
+        if (data) {
+          //Insert file name and link in DB
+          const newFile = await File.create({
+            fileName: data.Key,
+            fileLink: data.Location
+          });
 
-
-        // Return success msg
-        return res.status(200).json({
-          Success: true,
-          Location: data.Location
-        })
+          // Return success msg
+          return res.status(200).json({
+            Success: true,
+            s3: data,
+            db: newFile
+          })
+        }
       });
-
-
-
 
     } catch (err) {
       console.log('ERROR', err);
@@ -60,7 +63,10 @@ class uploadController {
   static async getFiles(req, res) {
 
     //Code to get all files from DB and return them
-    
+    const files = await File.findAll({ limit: 10 });
+
+    console.log(files);
+
   }
 }
 
