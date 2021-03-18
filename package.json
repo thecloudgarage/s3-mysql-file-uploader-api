@@ -5,7 +5,7 @@
   "main": "./src/server.js",
   "scripts": {
     "start": "nodemon -L ./src/server.js ",
-    "dev": "nodemon --exec babel-node ./src/server.js",
+    "dev": "nodemon -L --exec babel-node ./src/server.js",
     "build": "babel ./src/server.js --out-file index.js"
   },
   "keywords": [
