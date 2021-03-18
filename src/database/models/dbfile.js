@@ -33,6 +33,5 @@ module.exports = (sequelize) => {
       tableName: 'files'
     }
   );
-
   return File;
 };

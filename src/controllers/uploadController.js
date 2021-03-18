@@ -14,18 +14,18 @@ class uploadController {
 
   //method to upload file and insert in the DB
   static async uploadMyFile(req, res) {
-    // Check if file was sent 
+    // Check if file was included in the request  
     if (!req.file)
       return res.send('Please upload a file');
 
     try {
-      const fileTarget = req.file;
+      const targetFile = req.file;
       //Upload file to S3
       // Setting up S3 upload parameters
       const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: fileTarget.originalname, // File name to be saved on s3
-        Body: fileTarget.buffer
+        Key: targetFile.originalname, // File name to be saved on s3
+        Body: targetFile.buffer
       };
 
       // Uploading files to the bucket
@@ -49,7 +49,6 @@ class uploadController {
           })
         }
       });
-
     } catch (err) {
       console.log('ERROR', err);
       return res.status(500).json({
