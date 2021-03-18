@@ -10,7 +10,7 @@ const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
 
-class uploadController {
+class uploadFiles {
 
   //method to upload file and insert in the DB
   static async uploadMyFile(req, res) {
@@ -74,4 +74,4 @@ class uploadController {
   }
 }
 
-module.exports = uploadController;
+module.exports = uploadFiles;
