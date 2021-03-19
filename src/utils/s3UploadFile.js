@@ -5,7 +5,7 @@ const s3 = new aws.S3({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
 
-function uploadFile (targetFile) {
+async function uploadFile(targetFile) {
     // Setting up S3 upload parameters
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
@@ -14,16 +14,16 @@ function uploadFile (targetFile) {
     };
 
     // Upload file to the bucket
-    s3.upload(params, function (err, data) {
-        if (err) {
-            throw err;
-        }
-
-        if (data) {
-            console.log(data);
-            return data;
-        }
-    });
+    try {
+        const uploadData = await s3.upload(params, function (err, data) {
+            if (err) {
+                throw err;
+            }
+        }).promise()
+        return uploadData;
+    } catch (err) {
+        return err;
+    }
 };
 
 module.exports = uploadFile;
