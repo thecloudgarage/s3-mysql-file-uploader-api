@@ -9,7 +9,7 @@ const { File } = db;
 
 class uploadController {
 
-  //method to upload file and insert in the DB
+  //method to upload file & insert in the DB
   static async uploadMyFile(req, res) {
     // Check if file was included in the request  
     if (!req.file)
@@ -23,7 +23,7 @@ class uploadController {
 
       // save file in db
       const dbData = await File.createFile(s3Data.Key, s3Data.Location);
-      
+
       // Return success respond with uploaded file info  
       return res.status(200).json({
         Success: true,
@@ -40,17 +40,24 @@ class uploadController {
     }
   }
 
-  //method to return files in the DB
+  //method to return files from DB
   static async getFiles(req, res) {
+    try {
+      // Get all files from DB 
+      const files = await File.getAll();
 
-    // Get all files from DB 
-    const files = await File.getAll();
-
-    // Return files response  
-    return res.status(200).json({
-      Success: true,
-      files: files
-    })
+      // Return files response  
+      return res.status(200).json({
+        Success: true,
+        files: files
+      })
+    } catch (err) {
+      console.log('ERROR', err);
+      return res.status(500).json({
+        Success: false,
+        Error: err.message
+      });
+    }
 
   }
 }
