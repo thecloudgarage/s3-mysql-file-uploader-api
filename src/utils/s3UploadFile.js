@@ -29,5 +29,6 @@ async function uploadFile(targetFile) {
 module.exports = uploadFile;
 
 // TODO: what if building an s3 handler class, should I use it as a controller?
+// TODO: Rollback s3 file upload incase I fail to update db
 
 

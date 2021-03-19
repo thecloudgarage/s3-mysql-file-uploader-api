@@ -20,18 +20,15 @@ class uploadController {
 
       // upload file to s3
       const s3Data = await s3UploadFile(targetFile);
-      
-      // save file in db
-      const newFile = await File.create({
-        fileName: s3Data.Key,
-        fileLink: s3Data.Location
-      });
 
+      // save file in db
+      const dbData = await File.createFile(s3Data.Key, s3Data.Location);
+      
       // Return success respond with uploaded file info  
       return res.status(200).json({
         Success: true,
         s3: s3Data,
-        db: newFile
+        db: dbData
       })
 
     } catch (err) {
@@ -47,10 +44,9 @@ class uploadController {
   static async getFiles(req, res) {
 
     // Get all files from DB 
-    const files = await File.findAll();
+    const files = await File.getAll();
 
-    // Return files
-    // Return success msg
+    // Return files response  
     return res.status(200).json({
       Success: true,
       files: files

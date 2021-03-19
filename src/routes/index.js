@@ -11,6 +11,7 @@ var storage = multer.memoryStorage({
         callback(null, '');
     }
 });
+
 // var multipleUpload = multer({ storage: storage }).array('file');
 var singleUpload = multer({ storage: storage }).single('myFile');
 

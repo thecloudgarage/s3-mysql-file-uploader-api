@@ -2,7 +2,6 @@ const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   class File extends Model {
-
   }
   File.init(
     {
@@ -33,5 +32,19 @@ module.exports = (sequelize) => {
       tableName: 'files'
     }
   );
+
+  File.createFile = async function (fName, location) {
+    const fileData = File.create({
+      fileName: fName,
+      fileLink: location
+    });
+    return fileData;
+  }
+
+  File.getAll = async () => {
+    const files = await File.findAll();
+    return files;
+  }
+
   return File;
 };
