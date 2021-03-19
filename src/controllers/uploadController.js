@@ -20,8 +20,7 @@ class uploadController {
 
       // upload file to s3
       const s3Data = await s3UploadFile(targetFile);
-      console.log(s3Data);
-
+      
       // save file in db
       const newFile = await File.create({
         fileName: s3Data.Key,
