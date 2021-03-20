@@ -18,8 +18,8 @@ class filesController {
     try {
       const targetFile = req.file;
 
-      // upload file to s3
-      const s3Data = await s3Controller.uploadFile(targetFile);
+      // upload file to s3 
+      const s3Data = await s3Controller.uploadFile(process.env.AWS_BUCKET_NAME, targetFile);
 
       // save file in db
       const dbData = await File.createFile(s3Data.Key, s3Data.Location);

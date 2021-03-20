@@ -6,10 +6,10 @@ const s3 = new aws.S3({
 })
 
 class s3Controller {
-    static async uploadFile(targetFile) {
+    static async uploadFile(bucket, targetFile) {
         // Setting up S3 upload parameters
         const params = {
-            Bucket: process.env.AWS_BUCKET_NAME,
+            Bucket: bucket,
             Key: targetFile.originalname, // File name to be saved on s3
             Body: targetFile.buffer
         };
@@ -27,10 +27,10 @@ class s3Controller {
         }
     };
 
-
-    static async getObjects() {
+    // Get all objects from the bucket 
+    static async getObjects(bucket) {
         var params = {
-            Bucket: process.env.AWS_BUCKET_NAME,
+            Bucket: bucket,
             Delimiter: '/',
         }
 
