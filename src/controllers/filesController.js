@@ -76,5 +76,3 @@ class filesController {
 }
 
 module.exports = filesController;
-
-// Is there away to rollback s3 trasaction in case of any error that comes later?
