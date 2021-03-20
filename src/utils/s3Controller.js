@@ -2,8 +2,8 @@ const aws = require('aws-sdk');
 const { param } = require('../routes');
 
 const s3 = new aws.S3({
-    accessKeyId: process.env.AWS_ACCESS_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    // accessKeyId: process.env.AWS_ACCESS_ID,
+    // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
 
 class s3Controller {
@@ -16,16 +16,12 @@ class s3Controller {
         };
 
         // Upload file to the bucket
-        try {
-            const uploadData = await s3.upload(params, function (err, data) {
-                if (err) {
-                    throw err;
-                }
-            }).promise()
-            return uploadData;
-        } catch (err) {
-            return err;
-        }
+        const uploadData = await s3.upload(params, function (err, data) {
+            if (err) {
+                throw err;
+            }
+        }).promise()
+        return uploadData;
     };
 
     // Check if a given file already exist in the bucket or not.
@@ -37,12 +33,13 @@ class s3Controller {
 
         try {
             await s3.headObject(params).promise()
-            return true;    
+            return true;
         } catch (err) {
             if (err.code === 'NotFound') {
                 return false;
             };
-            return err;
+            err.message = "Access Denied";
+            throw err
         }
     }
 
@@ -53,19 +50,17 @@ class s3Controller {
             Delimiter: '/',
         }
 
-        s3.listObjects(params, function (err, data) {
+        await s3.listObjects(params, function (err, data) {
             if (err) throw err;
             console.log(data);
         });
     }
-
-
 }
 
 
 module.exports = s3Controller;
 
-// TODO: Rollback s3 file upload incase I fail to update db
 // TODO: WHERE SHOULD I PLACE THE S3COntroller?
+// How to handle access denied error and what are my options to build scalable error logging messages?
 
 
