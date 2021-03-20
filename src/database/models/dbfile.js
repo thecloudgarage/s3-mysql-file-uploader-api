@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
   );
 
   File.createFile = async function (fName, location) {
-    const fileData = File.create({
+    const fileData = await File.create({
       fileName: fName,
       fileLink: location
     });
