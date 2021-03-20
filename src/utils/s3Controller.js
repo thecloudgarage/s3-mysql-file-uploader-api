@@ -1,4 +1,5 @@
 const aws = require('aws-sdk');
+const { param } = require('../routes');
 
 const s3 = new aws.S3({
     accessKeyId: process.env.AWS_ACCESS_ID,
@@ -26,6 +27,24 @@ class s3Controller {
             return err;
         }
     };
+
+    // Check if a given file already exist in the bucket or not.
+    static async fileExist(bucket, fileName) {
+        const params = {
+            Bucket: bucket,
+            Key: fileName,
+        };
+
+        try {
+            await s3.headObject(params).promise()
+            return true;    
+        } catch (err) {
+            if (err.code === 'NotFound') {
+                return false;
+            };
+            return err;
+        }
+    }
 
     // Get all objects from the bucket 
     static async getObjects(bucket) {
