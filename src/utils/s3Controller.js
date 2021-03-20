@@ -7,12 +7,12 @@ const s3 = new aws.S3({
 })
 
 class s3Controller {
-    static async uploadFile(bucket, targetFile) {
+    static async uploadFile(bucket, fName, fContent) {
         // Setting up S3 upload parameters
         const params = {
             Bucket: bucket,
-            Key: targetFile.originalname, // File name to be saved on s3
-            Body: targetFile.buffer
+            Key: fName, // File name to be saved on s3
+            Body: fContent
         };
 
         // Upload file to the bucket
@@ -25,10 +25,10 @@ class s3Controller {
     };
 
     // Check if a given file already exist in the bucket or not.
-    static async fileExist(bucket, fileName) {
+    static async fileExist(bucket, fName) {
         const params = {
             Bucket: bucket,
-            Key: fileName,
+            Key: fName,
         };
 
         try {

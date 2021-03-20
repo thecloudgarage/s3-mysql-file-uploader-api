@@ -22,7 +22,7 @@ class filesController {
       const targetFile = req.file;
 
       // Check if the given file exist in the bucket 
-      const exist = await s3Controller.fileExist(process.env.AWS_BUCKET_NAME, targetFile.originalname);
+      const exist = await s3Controller.fileExist(process.env.AWS_BUCKET_NAME, targetFile.originalname, targetFile.buffer);
       // Return Err 422 if file already exist in the bucket
       if (exist === true) {
         return res.status(422).json({
