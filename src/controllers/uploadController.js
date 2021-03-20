@@ -2,12 +2,12 @@ const db = require('../database/models');
 const dotenv = require('dotenv');
 // TODO: How to avoide file calls with ../
 // const httpStatusCodes = require('../constants/httpStatusCodes');
-const s3UploadFile = require('../utils/s3UploadFile')
+const s3Controller = require('../utils/s3Controller')
 dotenv.config();
 
 const { File } = db;
 
-class uploadController {
+class filesController {
 
   //method to upload file & insert in the DB
   static async uploadMyFile(req, res) {
@@ -19,7 +19,7 @@ class uploadController {
       const targetFile = req.file;
 
       // upload file to s3
-      const s3Data = await s3UploadFile(targetFile);
+      const s3Data = await s3Controller.uploadFile(targetFile);
 
       // save file in db
       const dbData = await File.createFile(s3Data.Key, s3Data.Location);
@@ -62,6 +62,6 @@ class uploadController {
   }
 }
 
-module.exports = uploadController;
+module.exports = filesController;
 
 // Is there away to rollback s3 trasaction in case of any error that comes later?
