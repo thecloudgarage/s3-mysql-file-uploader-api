@@ -22,7 +22,7 @@ class filesController {
       const targetFile = req.file;
 
       // Check if the given file exist in the bucket 
-      const exist = await s3Controller.fileExist(process.env.AWS_BUCKET_NAME, targetFile.originalname, targetFile.buffer);
+      const exist = await s3Controller.fileExist(process.env.AWS_BUCKET_NAME, targetFile.originalname);
       // Return Err 422 if file already exist in the bucket
       if (exist === true) {
         return res.status(422).json({
@@ -32,7 +32,7 @@ class filesController {
       }
 
       // Upload file to s3 
-      const s3Data = await s3Controller.uploadFile(process.env.AWS_BUCKET_NAME, targetFile);
+      const s3Data = await s3Controller.uploadFile(process.env.AWS_BUCKET_NAME, targetFile.originalname, targetFile.buffer);
 
       // Save file in db
       const dbData = await File.createFile(s3Data.Key, s3Data.Location);
@@ -46,7 +46,7 @@ class filesController {
 
     } catch (err) {
       console.log('ERROR', err);
-      return res.status(500).json({
+      return res.status(err.statusCode).json({
         Success: false,
         Error: err.message
       });
@@ -66,7 +66,7 @@ class filesController {
       })
     } catch (err) {
       console.log('ERROR', err);
-      return res.status(500).json({
+      return res.status(err.statusCode).json({
         Success: false,
         Error: err.message
       });

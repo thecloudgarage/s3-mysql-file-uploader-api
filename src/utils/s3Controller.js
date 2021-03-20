@@ -57,10 +57,5 @@ class s3Controller {
     }
 }
 
-
 module.exports = s3Controller;
-
-// TODO: WHERE SHOULD I PLACE THE S3COntroller?
-// How to handle access denied error and what are my options to build scalable error logging messages?
-
 
