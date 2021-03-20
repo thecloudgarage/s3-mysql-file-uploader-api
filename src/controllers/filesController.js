@@ -18,10 +18,20 @@ class filesController {
     try {
       const targetFile = req.file;
 
-      // upload file to s3 
+      // Check if the given file exist in the bucket 
+      const exist = await s3Controller.fileExist(process.env.AWS_BUCKET_NAME, targetFile.originalname);
+      // Return Err 422 if file already exist in the bucket
+      if (exist === true) {
+        return res.status(422).json({
+          Success: false,
+          Error: "Unprocessable Entity; file with the same name already exist"
+        });
+      }
+
+      // Upload file to s3 
       const s3Data = await s3Controller.uploadFile(process.env.AWS_BUCKET_NAME, targetFile);
 
-      // save file in db
+      // Save file in db
       const dbData = await File.createFile(s3Data.Key, s3Data.Location);
 
       // Return success respond with uploaded file info  
