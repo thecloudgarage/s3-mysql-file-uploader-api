@@ -13,7 +13,10 @@ class filesController {
   static async uploadMyFile(req, res) {
     // Check if file was included in the request  
     if (!req.file)
-      return res.send('Please upload a file');
+      return res.status(400).json({
+        Success: false,
+        Error: "Bad Request - please upload a file"
+      });
 
     try {
       const targetFile = req.file;
@@ -24,7 +27,7 @@ class filesController {
       if (exist === true) {
         return res.status(422).json({
           Success: false,
-          Error: "Unprocessable Entity; file with the same name already exist"
+          Error: "Unprocessable Entity - file with the same name already exist"
         });
       }
 
