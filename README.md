@@ -1,5 +1,5 @@
-# s3-file-uploader
-Code template to upload files to S3 using nodejs
+# file-uploader-api
+API used to upload files to S3 using nodejs
 
 ## Running the application
 ### Manually
