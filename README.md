@@ -1,7 +1,6 @@
 # file-uploader-api
 **Version 1.0.0**
 
-A RESTful API that serves data to the trivia game. Using the Trivia API enables the user to add, delete, update, set questions, and play the game choosing a specific category.
 S3 file uploader api with Nodejs.
 
 > Note: JavaScript ES5 is used for this application.
