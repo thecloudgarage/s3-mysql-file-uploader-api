@@ -1,7 +1,7 @@
 # file-uploader-api
 **Version 1.0.0**
 
-S3 file uploader api with Nodejs.
+S3 file uploader API built with Nodejs.
 
 > Note: JavaScript ES5 is used for this application.
 
