@@ -39,7 +39,7 @@ From your terminal, install all dependencies needed by executing ```npm install`
 
 - Create .env file in the main project directory to store all environment variables needed. If you are using linux, execute ```touch .env``` from your terminal.
 
-- Copy and update the values of the following variables to your .env file.
+- Copy and update the values of the following variables to your .env file. Remove the braces and no quotes
 ```
 DATABASE_HOST={db_host}
 DATABASE={db_name}
@@ -65,7 +65,33 @@ npm start
 
 Interact with the api via postman. The default URI is http://{your_url}:{port_number}/api/v1/your-route eg: http://localhost:8080/api/v1/upload
 
+* Open POSTMAN and in the body section select form-data
+* Select Key as File and name the key as myFile (don't change the name of the key as it is binding in the code)
+* Select the file from the local machine and upload
 
+Example response
+
+```
+{
+    "Success": true,
+    "s3": {
+        "ETag": "\"dd46ea47691382498ffe79005fe9153c\"",
+        "VersionId": "z61T3WakZ2T.P2r.UP4xEnIe3LIwYvIF",
+        "Location": "https://yourbucketname.s3.amazonaws.com/adsf.jpg",
+        "key": "adsf.jpg",
+        "Key": "adsf.jpg",
+        "Bucket": "axisabcone"
+    },
+    "db": {
+        "createdAt": {
+            "val": "CURRENT_TIMESTAMP"
+        },
+        "id": 1,
+        "fileName": "adsf.jpg",
+        "fileLink": "https://yourbucketname.s3.amazonaws.com/adsf.jpg"
+    }
+}
+```
 
 
 
