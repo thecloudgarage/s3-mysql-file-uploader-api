@@ -63,7 +63,7 @@ npm start
 
 ### Interact with API 
 
-Interact with the api via postman. The default URI is http://{your_url}:{port_number}/api/v1/your-route eg: http://localhost:8080/api/v1/upload
+Interact with the api via postman. The default URI is http://{your_url}:{port_number}/api/v1/your-route eg: http://localhost:5001/api/v1/upload
 
 * Open POSTMAN and in the body section select form-data
 * Select Key as File and name the key as myFile (don't change the name of the key as it is binding in the code)
@@ -93,5 +93,9 @@ Example response
 }
 ```
 
+### Observing the database entry
+
+* Also included in the docker-compose is a phpMyAdmin container, browse to your IP and 8082 port number
+* Select the database and observe the file entries saved.
 
 
