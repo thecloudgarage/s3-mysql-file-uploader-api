@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mysqldb:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root@password
+      MYSQL_DATABASE: files
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysqlconfig/my.conf:/etc/mysql/conf.d/config-file.cnf"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: mysqldb
+      PMA_USER: root
+      PMA_PASSWORD: root@password
+    ports:
+      - "8082:80"
