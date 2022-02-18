@@ -28,7 +28,7 @@ Follow instructions to install the node on your machine [Node docs](https://node
 Navigate to your project folder on local machine and execute the following command from your terminal to clone the repository into your current directory locally.
 
 ```bash
-git clone https://github.com/ahmedmeshref/file-uploader-api.git
+git clone https://github.com/thecloudgarage/file-uploader-api.git
 ```
 
 #### Install Dependencies
@@ -51,7 +51,7 @@ AWS_ACCESS_ID={aws_access_id}
 AWS_SECRET_ACCESS_KEY={aws_access_key}
 ```
 
-> Example: DATABASE_HOST=localhost
+> Example: DATABASE_HOST=ip-address-of-host
  
 #### Run API
 
